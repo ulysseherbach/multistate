@@ -62,7 +62,5 @@ def simulate(rate, timepoints, init_state=None, d0=1):
             X = pdmp_flow(U, state, d0)
             state = (E,X)
             T += U
-        state_old = state_old[0], pdmp_flow(t-Told, state_old, d0)
-        Told = t
-        sim += [state_old]
+        sim += [(state_old[0],pdmp_flow(t-Told, state_old, d0))]
     return np.array(sim, dtype=types)

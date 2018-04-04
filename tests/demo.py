@@ -50,3 +50,11 @@ y = ms.refractory.dist_pdmp(x, promoter, scale=100)
 plt.plot(x, y, color=bleu, lw=2)
 plt.savefig('test_dist_pdmp.pdf', **options)
 
+### Simulation de trajectoire
+fig = plt.figure(figsize=(6,2))
+T = np.linspace(0,40,1000)
+traj = ms.simulate(promoter, T)
+E, X = 1*(traj['E']==1), traj['X']
+plt.plot(T, X[:,0], color=bleu)
+plt.savefig('test_traj_pdmp.pdf', **options)
+
