@@ -12,10 +12,8 @@ __author__ = 'Ulysse Herbach'
 from multistate.promoters import twostate, cyclic, dirichlet
 __all__ += ['twostate', 'cyclic', 'dirichlet']
 
-# from multistate.simulation import
-
 import multistate.refractory as refractory
 __all__ += ['refractory']
 
-from multistate.simulation import simulate
-__all__ += ['simulate']
+from multistate.simulation import sim_pdmp, sim_ssa, conditional_pdmp
+__all__ += ['sim_pdmp', 'sim_ssa', 'conditional_pdmp']

@@ -2,7 +2,7 @@
 Some examples of promoter models
 --------------------------------
 
-NB: when modelling a refractory promoter (only one active state),
+NB: when modeling a refractory promoter (only one active state),
 all functions make the convention that state 1 is the active one.
 """
 
