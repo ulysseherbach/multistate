@@ -1,8 +1,6 @@
 ### Main tests for the multistate package ###
-### For testing
 import sys
-sys.path.append("../")
-### Import the relevant packages
+sys.path.append("../../")
 import numpy as np
 import matplotlib.pyplot as plt
 import multistate as ms
