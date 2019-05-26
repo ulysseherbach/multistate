@@ -9,4 +9,4 @@
 *.rtf
 
 # Working files
-multistate_tests.py
+tests.py
