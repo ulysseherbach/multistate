@@ -1,6 +1,5 @@
 ### Small demo for the multistate package ###
-import sys
-sys.path.append("../")
+import sys; sys.path.append('../')
 import numpy as np
 import matplotlib.pyplot as plt
 import multistate as ms
