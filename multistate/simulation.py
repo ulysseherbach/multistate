@@ -176,3 +176,4 @@ def simplify_prom(T, E):
             e = E[k]
             traj += [(t, e)]
     return np.array(traj, dtype=types)
+    
