@@ -8,5 +8,8 @@
 *.html
 *.rtf
 
+# Distribution
+*.egg-info
+
 # Working files
 tests.py
