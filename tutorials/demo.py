@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import multistate as ms
 
 ### Graphical parameters
-options = {'dpi':100, 'bbox_inches':'tight', 'frameon':False}
+options = {'dpi':100, 'bbox_inches':'tight'}
 ### Colors
 rouge = '#D91D12'
 orange = '#F06E06'
