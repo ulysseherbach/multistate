@@ -11,5 +11,9 @@
 # Distribution
 *.egg-info
 
+# Editor files
+*.sublime-project
+*.sublime-workspace
+
 # Working files
 tests.py
