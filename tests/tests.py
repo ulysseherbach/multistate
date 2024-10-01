@@ -1,6 +1,4 @@
 ### Main tests for the multistate package ###
-import sys
-sys.path.append("../../")
 import numpy as np
 import multistate as ms
 
@@ -44,5 +42,3 @@ T = np.linspace(0,Tmax,1000)
 x0 = np.array([0,0,0,1])
 ctraj = ms.conditional_pdmp(T, x0, jtraj)
 X = np.dot(ctraj['X'], u)
-
-
