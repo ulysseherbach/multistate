@@ -4,7 +4,6 @@ Refractory
 
 Compute exact stationary distributions for refractory promoters
 """
-
 import numpy as np
 from mpmath import fac, power, exp, loggamma, hyper, meijerg
 from scipy.linalg import expm
@@ -18,7 +17,7 @@ def eigenvalues(rate, onstate=1):
     K = transition_matrix(rate)
     n = np.size(K[:,0])
     ### Check the active state
-    if not (onstate in set(range(1,n+1))):
+    if onstate not in set(range(1,n+1)):
         print('Error: the active state must be in transitions')
         return None
     i = onstate - 1
@@ -33,8 +32,10 @@ def dist_poisson(val, rate, onstate=1, scale=100):
     a, b = eigenvalues(rate, onstate)
     plist, s = [], scale
     N = np.size(a) # Number of inactive states
-    if (np.size(val) == 1): val = np.array([val], dtype=float)
-    else: val = np.array(val, dtype=float)
+    if (np.size(val) == 1):
+        val = np.array([val], dtype=float)
+    else:
+        val = np.array(val, dtype=float)
     for m in val:
         am = [x + m for x in a]
         bm = [x + m for x in b]
@@ -45,16 +46,20 @@ def dist_poisson(val, rate, onstate=1, scale=100):
         ### Precise computation step
         p = exp(c) * power(s, m) * hyper(am, bm, -s) / fac(m)
         plist.append(p.real)
-    if (len(plist) == 1): return plist[0]
-    else: return np.array(plist)
+    if (len(plist) == 1):
+        return plist[0]
+    else:
+        return np.array(plist)
 
 def dist_pdmp(val, rate, onstate=1, scale=1):
     """RNA distribution in the continuous case (PDMP)."""
     a, b = eigenvalues(rate, onstate)
     plist, s = [], scale
     N = np.size(a) # Number of inactive states
-    if (np.size(val) == 1): val = np.array([val], dtype=float)
-    else: val = np.array(val, dtype=float)
+    if (np.size(val) == 1):
+        val = np.array([val], dtype=float)
+    else:
+        val = np.array(val, dtype=float)
     c = 0
     for k in range(N):
         c += loggamma(b[k]) - loggamma(a[k])
@@ -62,15 +67,19 @@ def dist_pdmp(val, rate, onstate=1, scale=1):
         ### Precise computation step
         p = exp(c) * meijerg([[],list(b-1)], [list(a-1),[]], x/s) / s
         plist.append(p.real)
-    if (len(plist) == 1): return plist[0]
-    else: return np.array(plist)
+    if (len(plist) == 1):
+        return plist[0]
+    else:
+        return np.array(plist)
 
 def dist_inactive(val, rate, onstate=1):
     """Distribution of the inactive period."""
     K = transition_matrix(rate)
     n = np.size(K[0])
-    if not (onstate in set(range(1,n+1))): return None
-    if (np.size(val) == 1): val = np.array([val])
+    if onstate not in set(range(1,n+1)):
+        return None
+    if (np.size(val) == 1):
+        val = np.array([val])
     i = onstate - 1
     p = K[:,i]
     p[i] = 0
@@ -80,17 +89,23 @@ def dist_inactive(val, rate, onstate=1):
     for t in val:
         v = np.dot(K, np.dot(expm(t*K), p))
         plist.append(v[i])
-    if (len(plist) == 1): return plist[0]
-    else: return np.array(plist)
+    if (len(plist) == 1):
+        return plist[0]
+    else:
+        return np.array(plist)
 
 def dist_active(val, rate, onstate=1):
     """Distribution of the active period."""
     K = transition_matrix(rate)
     n = np.size(K[0])
-    if not (onstate in set(range(1,n+1))): return None
-    if (np.size(val) == 1): val = np.array([val])
+    if onstate not in set(range(1,n+1)):
+        return None
+    if (np.size(val) == 1):
+        val = np.array([val])
     i = onstate - 1
     tau = -K[i,i]
     plist = [tau*np.exp(-t*tau) for t in val]
-    if (len(plist) == 1): return plist[0]
-    else: return np.array(plist)
+    if (len(plist) == 1):
+        return plist[0]
+    else:
+        return np.array(plist)

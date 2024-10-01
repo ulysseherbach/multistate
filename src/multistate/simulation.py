@@ -6,7 +6,6 @@ Compute sample paths for multi-state promoters using:
 - the classical (discrete) framework, aka SSA algorithm
 - the PDMP (continuous) framework
 """
-
 import numpy as np
 from multistate.promoters import transition_matrix
 
@@ -48,11 +47,12 @@ def sim_pdmp(rate, timepoints, init_state=None, d0=1):
     types = [('E','int64'), ('X','float64',n)]
     ### Initialization
     T, sim = 0, []
-    if init_state is None: 
+    if init_state is None:
         E, X = 1, (n-1)*(0,) + (1,)
     elif (np.sum(init_state[1]) == 1):
         E, X = init_state[0], tuple(init_state[1])
-    else: print('Warning: init_state should sum to 1')
+    else:
+        print('Warning: init_state should sum to 1')
     state = (E,X)
     ### The core loop for simulation and recording
     for t in timepoints:
@@ -80,9 +80,12 @@ def step_ssa(state, k, u, d0):
     T += U
     ### 2. Update the state
     r = np.random.choice(n+2, p=v/tau)
-    if (r < n): E = r + 1
-    elif (r == n): M += 1
-    else: M -= 1
+    if (r < n):
+        E = r + 1
+    elif (r == n):
+        M += 1
+    else:
+        M -= 1
     return T, E, M, U
 
 def sim_ssa(rate, u, time, init_state=(1,0), d0=1):
@@ -118,7 +121,8 @@ def conditional_pdmp(timepoints, x0, jtraj, d0=1):
     for t in timepoints:
         while (t >= T):
             Told, state_old = T, state
-            if (k < l-1): k += 1
+            if (k < l-1):
+                k += 1
             E, U = jtraj['E'][k], jtraj['U'][k]
             X = pdmp_flow(U, state, d0)
             state = (E,X)
@@ -176,4 +180,3 @@ def simplify_prom(T, E):
             e = E[k]
             traj += [(t, e)]
     return np.array(traj, dtype=types)
-    

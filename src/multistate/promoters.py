@@ -5,7 +5,6 @@ Some examples of promoter models
 NB: when modeling a refractory promoter (only one active state),
 all functions make the convention that state 1 is the active one.
 """
-
 import numpy as np
 
 ### General functions
@@ -36,7 +35,8 @@ def twostate(a, b):
     out : dict
         Transition rates in the form {(i,j): rate[i->j]}.
     """
-    if np.min([a,b]) <= 0: raise ValueError('a and b must be positive')
+    if np.min([a,b]) <= 0:
+        raise ValueError('a and b must be positive')
     return {(1,2): b, (2,1): a}
 
 def cyclic(a, b=None):
@@ -60,19 +60,26 @@ def cyclic(a, b=None):
     n = np.size(a) # Number of states
     rate = {}
     ### Detect potential problems
-    if (n == 2) and (b is None): return twostate(a[1], a[0])
-    if np.min(a) <= 0: raise ValueError('rates of a must be positive')
+    if (n == 2) and (b is None):
+        return twostate(a[1], a[0])
+    if np.min(a) <= 0:
+        raise ValueError('rates of a must be positive')
     if b is not None:
-        if n < 3: raise ValueError('size of a must be 3 or more')
-        if np.size(b) != n: raise ValueError('a and b must be of same size')
-        elif np.min(b)<0: raise ValueError('rates of b must be nonnegative')
-    else: b = np.zeros(n)
+        if n < 3:
+            raise ValueError('size of a must be 3 or more')
+        if np.size(b) != n:
+            raise ValueError('a and b must be of same size')
+        elif np.min(b)<0:
+            raise ValueError('rates of b must be nonnegative')
+    else:
+        b = np.zeros(n)
     ### Fill the rate dictionary
     for i in range(1,n+1):
         j = (i % n) + 1
         k = (i % n) - 1
         rate[i,j] = a[k]
-        if b[k] > 0: rate[j,i] = b[k]
+        if b[k] > 0:
+            rate[j,i] = b[k]
     return rate
 
 def dirichlet(a):
@@ -93,10 +100,13 @@ def dirichlet(a):
     n = np.size(a) # Number of states
     rate = {}
     ### Detect potential problems
-    if n < 2: raise ValueError('size of a must be 2 or more')
-    if np.min(a) <= 0: raise ValueError('rates of a must be positive')
+    if n < 2:
+        raise ValueError('size of a must be 2 or more')
+    if np.min(a) <= 0:
+        raise ValueError('rates of a must be positive')
     ### Fill the rate dictionary
     for i in range(1,n+1):
         for j in range(1,n+1):
-            if i != j: rate[j,i] = a[i-1]
+            if i != j:
+                rate[j,i] = a[i-1]
     return rate
