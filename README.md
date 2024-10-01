@@ -6,7 +6,7 @@ This Python package implements the results of my article on [stochastic gene exp
 
 ### Demo
 
-The [tutorials](https://github.com/ulysseherbach/multistate/tree/main/tutorials) folder contains a basic demo script showing what the `multistate` package does along with various examples.
+The [tests](https://github.com/ulysseherbach/multistate/tree/main/tests) folder contains a basic demo script showing what the `multistate` package does along with various examples.
 
 ### Dependencies
 
