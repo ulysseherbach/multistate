@@ -1,19 +1,15 @@
-# OS junk files
+# OS files
 *.DS_Store
 
-# Other files
+# Python
 *.pyc
-*.ipynb
-*.pdf
-*.html
-*.rtf
+
+# Notebook
+.ipynb_checkpoints
 
 # Distribution
 *.egg-info
 
-# Editor files
-*.sublime-project
-*.sublime-workspace
-
 # Working files
-tests.py
+main.py
+tests/results
