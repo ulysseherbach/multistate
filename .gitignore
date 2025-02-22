@@ -4,12 +4,11 @@
 # Python
 *.pyc
 
-# Notebook
+# Other
 .ipynb_checkpoints
 
 # Distribution
 dist
 
-# Working files
+# Local
 main.py
-tests/results
