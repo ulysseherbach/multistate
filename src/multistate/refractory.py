@@ -18,8 +18,7 @@ def eigenvalues(rate, onstate=1):
     n = np.size(K[:,0])
     ### Check the active state
     if onstate not in set(range(1,n+1)):
-        print('Error: the active state must be in transitions')
-        return None
+        raise ValueError("the active state must be in transitions")
     i = onstate - 1
     l = [j for j in range(i)] + [j for j in range(i+1,n)]
     A = K[l][:,l] # Remove i-th lign and i-th column

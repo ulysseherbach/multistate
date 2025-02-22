@@ -12,13 +12,19 @@ See https://github.com/ulysseherbach/multistate for documentation.
 from importlib.metadata import version as _version
 from multistate.promoters import twostate, cyclic, dirichlet
 from multistate.simulation import sim_pdmp, sim_ssa, conditional_pdmp
+import multistate.refractory as refractory
 
-__all__ = ['twostate', 'cyclic', 'dirichlet']
-__all__ += ['sim_pdmp', 'sim_ssa', 'conditional_pdmp']
-
-__author__ = 'Ulysse Herbach'
+__all__ = [
+    "twostate",
+    "cyclic",
+    "dirichlet",
+    "sim_pdmp",
+    "sim_ssa",
+    "conditional_pdmp",
+    "refractory",
+]
 
 try:
-    __version__ = _version('multistate')
+    __version__ = _version("multistate")
 except Exception:
-    __version__ = 'unknown version'
+    __version__ = "unknown version"

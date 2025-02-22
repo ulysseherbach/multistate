@@ -36,7 +36,7 @@ def twostate(a, b):
         Transition rates in the form {(i,j): rate[i->j]}.
     """
     if np.min([a,b]) <= 0:
-        raise ValueError('a and b must be positive')
+        raise ValueError("a and b must be positive")
     return {(1,2): b, (2,1): a}
 
 def cyclic(a, b=None):
@@ -63,14 +63,14 @@ def cyclic(a, b=None):
     if (n == 2) and (b is None):
         return twostate(a[1], a[0])
     if np.min(a) <= 0:
-        raise ValueError('rates of a must be positive')
+        raise ValueError("rates of a must be positive")
     if b is not None:
         if n < 3:
-            raise ValueError('size of a must be 3 or more')
+            raise ValueError("size of a must be 3 or more")
         if np.size(b) != n:
-            raise ValueError('a and b must be of same size')
+            raise ValueError("a and b must be of same size")
         elif np.min(b)<0:
-            raise ValueError('rates of b must be nonnegative')
+            raise ValueError("rates of b must be nonnegative")
     else:
         b = np.zeros(n)
     ### Fill the rate dictionary
@@ -101,9 +101,9 @@ def dirichlet(a):
     rate = {}
     ### Detect potential problems
     if n < 2:
-        raise ValueError('size of a must be 2 or more')
+        raise ValueError("size of a must be 2 or more")
     if np.min(a) <= 0:
-        raise ValueError('rates of a must be positive')
+        raise ValueError("rates of a must be positive")
     ### Fill the rate dictionary
     for i in range(1,n+1):
         for j in range(1,n+1):

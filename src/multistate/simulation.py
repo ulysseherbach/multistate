@@ -40,11 +40,10 @@ def sim_pdmp(rate, timepoints, init_state=None, d0=1):
     if (np.size(timepoints) == 1):
         timepoints = np.array([timepoints])
     if np.any(timepoints != np.sort(timepoints)):
-        print('Error: timepoints must be in increasing order')
-        return None
+        raise ValueError("timepoints must be in increasing order")
     H = transition_matrix(rate)
     n = np.size(H[0])
-    types = [('E','int64'), ('X','float64',n)]
+    types = [('E', 'int64'), ('X', 'float64', n)]
     ### Initialization
     T, sim = 0, []
     if init_state is None:
@@ -52,7 +51,7 @@ def sim_pdmp(rate, timepoints, init_state=None, d0=1):
     elif (np.sum(init_state[1]) == 1):
         E, X = init_state[0], tuple(init_state[1])
     else:
-        print('Warning: init_state should sum to 1')
+        print("Warning: init_state should sum to 1")
     state = (E,X)
     ### The core loop for simulation and recording
     for t in timepoints:
@@ -91,7 +90,7 @@ def step_ssa(state, k, u, d0):
 def sim_ssa(rate, u, time, init_state=(1,0), d0=1):
     """Exact simulation of the basic multistate promoter model."""
     H = transition_matrix(rate)
-    types = [('T','float64'), ('E','int64'), ('M','int64')]
+    types = [('T', 'float64'), ('E', 'int64'), ('M', 'int64')]
     ### Initialization
     T, (E, M) = 0, init_state
     sim = [(T, E, M)]
@@ -109,10 +108,9 @@ def conditional_pdmp(timepoints, x0, jtraj, d0=1):
     if (np.size(timepoints) == 1):
         timepoints = np.array([timepoints])
     if np.any(timepoints != np.sort(timepoints)):
-        print('Error: timepoints must be in increasing order')
-        return None
+        raise ValueError("timepoints must be in increasing order")
     n = np.size(x0)
-    types = [('E','int64'), ('X','float64',n)]
+    types = [('E', 'int64'), ('X', 'float64', n)]
     ### Initialization
     T, sim = 0, []
     state = (jtraj['E'][0], tuple(x0))
@@ -160,7 +158,7 @@ def conditional_pdmp(timepoints, x0, jtraj, d0=1):
 ### Utility functions
 def get_jtraj(T, E):
     """Get minimal jumps and states from a given promoter sample path."""
-    types = [('U','float64'), ('E','int64')]
+    types = [('U', 'float64'), ('E', 'int64')]
     told, e = 0, E[0]
     jtraj = [(0, e)]
     for k, t in enumerate(T):
@@ -172,7 +170,7 @@ def get_jtraj(T, E):
 
 def simplify_prom(T, E):
     """Simplify a promoter sample path by removing phantom jumps."""
-    types = [('T','float64'), ('E','int64')]
+    types = [('T', 'float64'), ('E', 'int64')]
     e = E[0]
     traj = [(0, e)]
     for k, t in enumerate(T):

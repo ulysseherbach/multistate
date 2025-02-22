@@ -11,7 +11,7 @@ for key, val in promoter.items():
 
 ### Promoter eigenvalues
 a, b = ms.refractory.eigenvalues(promoter)
-print('a = {}'.format(a) + '\n' + 'b = {}'.format(b))
+print(f"a = {a}" + "\n" + f"b = {b}")
 
 ### Distribution of the inactive period
 x = np.linspace(0,5,1000)
